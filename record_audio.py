@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 RESPEAKER_RATE = 16000
 RESPEAKER_CHANNELS = 6  # Change based on firmwares, 1_channel_firmware.bin as 1 or 6_channels_firmware.bin as 6
 RESPEAKER_WIDTH = 2
-# Run getDeviceInfo.py to get the index
+# Run find_re_speaker_id.py to get the index
 RESPEAKER_INDEX = 12  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
 RECORD_SECONDS = 10  # Reduce the recording duration to 20 seconds
