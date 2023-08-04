@@ -3,7 +3,7 @@
 # Run the commands in parallel and store the process IDs
 sudo ./record_azure & record_azure_pid=$!
 sudo python3 record_audio.py & record_audio_pid=$!
-sleep 5
+sleep 10
 sudo python3 rgb_uploading.py & rgb_pid=$!
 sudo python3 point_cloud_uploading.py & pc_pid=$!
 sudo python3 audio_uploading.py & audio_pid=$!
