@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 RESPEAKER_RATE = 16000
 RESPEAKER_CHANNELS = 6  # Change based on firmwares, 1_channel_firmware.bin as 1 or 6_channels_firmware.bin as 6
 RESPEAKER_WIDTH = 2
-# Run find_re_speaker_id.py to get the index
+# Run getDeviceInfo.py to get the index
 RESPEAKER_INDEX = 12  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
-RECORD_SECONDS = 10  # Reduce the recording duration to 20 seconds
+RECORD_SECONDS = 10  # Reduce the recording duration to 10 seconds
 MAX_FOLDER_SIZE_GB = 1
 
 p = pyaudio.PyAudio()
@@ -86,9 +86,9 @@ try:
                 print("Folder size exceeds 1 GB. Recording terminated.")
                 break
 
-            # Save the audio recording with the timestamp and count
+            # Save the audio recording with the epoch timestamp and count
             current_recording_count = len(os.listdir(audio_folder)) + 1
-            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            timestamp = int((datetime.now() - datetime(1970, 1, 1)).total_seconds() * 1000)
             audio_file_path = os.path.join(audio_folder, f"audio_{current_recording_count}_{timestamp}.wav")
             wf = wave.open(audio_file_path, 'wb')
             wf.setnchannels(RESPEAKER_CHANNELS)
