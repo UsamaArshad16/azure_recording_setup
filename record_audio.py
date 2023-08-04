@@ -10,7 +10,7 @@ RESPEAKER_WIDTH = 2
 RESPEAKER_INDEX = 12  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
 RECORD_SECONDS = 10  # Reduce the recording duration to 10 seconds
-MAX_FOLDER_SIZE_GB = 1
+MAX_FOLDER_SIZE_GB = 5
 
 p = pyaudio.PyAudio()
 
@@ -48,7 +48,7 @@ def get_folder_size(folder_path):
             file_path = os.path.join(dirpath, filename)
             total_size += os.path.getsize(file_path)
     return total_size
-
+current_recording_count = len(os.listdir(audio_folder)) + 1
 try:
     while True:
         try:
@@ -87,7 +87,7 @@ try:
                 break
 
             # Save the audio recording with the epoch timestamp and count
-            current_recording_count = len(os.listdir(audio_folder)) + 1
+            current_recording_count = current_recording_count + 1
             timestamp = int((datetime.now() - datetime(1970, 1, 1)).total_seconds() * 1000)
             audio_file_path = os.path.join(audio_folder, f"audio_{current_recording_count}_{timestamp}.wav")
             wf = wave.open(audio_file_path, 'wb')
