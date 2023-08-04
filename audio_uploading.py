@@ -31,13 +31,13 @@ def delete_file(file_path):
 if __name__ == "__main__":
     url = "https://rehabrobottesting.azurewebsites.net/Storage/Mobile/UploadFiles"
     main_folder = os.path.expanduser("~/azure_recordings")
-    rgb_images_folder = os.path.join(main_folder, "audio")
+    audio_folder = os.path.join(main_folder, "audio")
 
-    if os.path.exists(rgb_images_folder):
+    if os.path.exists(audio_folder):
         try:
             while True:
-                upload_files_in_folder(url, rgb_images_folder)
+                upload_files_in_folder(url, audio_folder)
         except KeyboardInterrupt:
             print("\nLoop terminated by user.")
     else:
-        print("rgb_images folder not found.")
+        print("audio_folder folder not found.")
