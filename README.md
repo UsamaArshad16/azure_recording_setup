@@ -35,4 +35,4 @@ This sh file runs all the scripts in a sequence.
 ## Start the recordings
 Open the terminal and use the commands below \
 ``` cd /path_to/azure_recodings ```\
-``` ./setup_recording.sh ```
+``` ./setup_recording_xavier.sh ```
