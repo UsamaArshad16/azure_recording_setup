@@ -83,7 +83,7 @@ try:
 
             max_folder_size_bytes = MAX_FOLDER_SIZE_GB * (1024 ** 3)  # Convert GB to bytes
             if folder_size_bytes >= max_folder_size_bytes:
-                print("Folder size exceeds 1 GB. Recording terminated.")
+                print("Folder size exceeds limit. Audio Recording terminated.")
                 break
 
             # Save the audio recording with the epoch timestamp and count
