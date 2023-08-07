@@ -12,4 +12,5 @@ sudo apt-get install portaudio19-dev python-pyaudio
 sudo pip3 install pyaudio
 sudo pip3 install pyusb click
 
-g++ sdk.cpp -o sdk -lk4a `pkg-config --cflags --libs opencv4`
+g++ record_azure.cpp -o record_azure -lk4a `pkg-config --cflags --libs opencv4`
+
