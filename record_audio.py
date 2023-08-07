@@ -53,7 +53,7 @@ def get_folder_size(folder_path):
     return total_size
 
 
-current_recording_count = len(os.listdir(audio_folder)) + 1
+current_recording_count = len(os.listdir(audio_folder))
 try:
     while True:
         try:
