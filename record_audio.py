@@ -7,10 +7,10 @@ RESPEAKER_RATE = 16000
 RESPEAKER_CHANNELS = 6  # Change based on firmwares, 1_channel_firmware.bin as 1 or 6_channels_firmware.bin as 6
 RESPEAKER_WIDTH = 2
 # Run getDeviceInfo.py to get the index
-RESPEAKER_INDEX = 12  # Refer to the input device id
+RESPEAKER_INDEX = 0  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
 RECORD_SECONDS = 10  # Reduce the recording duration to 10 seconds
-MAX_FOLDER_SIZE_GB = 5
+MAX_FOLDER_SIZE_GB = 19.80
 
 p = pyaudio.PyAudio()
 
@@ -46,8 +46,13 @@ def get_folder_size(folder_path):
     for dirpath, _, filenames in os.walk(folder_path):
         for filename in filenames:
             file_path = os.path.join(dirpath, filename)
-            total_size += os.path.getsize(file_path)
+            try:
+                total_size += os.path.getsize(file_path)
+            except OSError as e:
+                print(f"Error getting size of {file_path}: {e}")
     return total_size
+
+
 current_recording_count = len(os.listdir(audio_folder)) + 1
 try:
     while True:
