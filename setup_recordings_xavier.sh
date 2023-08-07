@@ -1,26 +1,18 @@
 #!/bin/bash
 
-# Run the commands in parallel and store the process IDs
+# Run the record_azure command in the background and store the process ID
 ./record_azure & record_azure_pid=$!
 python3 record_audio.py & record_audio_pid=$!
-sleep 10
+# Wait for 15 seconds
+sleep 15
+
+# Run the python3 rgb_uploading.py command in the background and store the process ID
 python3 rgb_uploading.py & rgb_pid=$!
 python3 point_cloud_uploading.py & pc_pid=$!
 python3 audio_uploading.py & audio_pid=$!
 
-# Wait for Ctrl+C
-trap 'kill_processes' INT
-
-# Function to forcefully terminate the processes
-kill_processes() {
-    echo "Forcefully shutting down..."
-    pkill -P $record_azure_pid
-    pkill -P $record_audio_pid
-    pkill -P $rgb_pid
-    pkill -P $pc_pid
-    pkill -P $audio_pid
-    exit
-}
+# Trap Ctrl+C and forcefully terminate processes
+trap 'kill -9 $record_azure_pid $record_audio_pid $rgb_pid $pc_pid $audio_pid' INT
 
 # Wait for any background process to finish
 wait
