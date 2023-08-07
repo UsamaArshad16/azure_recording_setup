@@ -1,7 +1,7 @@
 # azure_recording_setup
 
 ## Dependencies
-Opencv, pyaudio, and pyusb are needed to run the scripts smoothly.
+k4a, Opencv, pyaudio, and pyusb are needed to run the scripts smoothly.
 ## Scripts
 
 ### record_azure.cpp
