@@ -1,8 +1,12 @@
 This file is for personal notes
+k4a installation link 
+https://github.com/microsoft/Azure_Kinect_ROS_Driver
+https://github.com/microsoft/Azure_Kinect_ROS_Driver/blob/melodic/docs/building.md
 
 opencv required
 pyaudio required
 pyusb required
+k4a required
 
 sudo apt-get install portaudio19-dev python-pyaudio
 sudo pip3 install pyaudio
