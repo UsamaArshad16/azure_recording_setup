@@ -134,13 +134,13 @@ int main()
             while (true) // Wait loop
             { double folder_size = getFolderSize(save_folder);
                 double available_space = max_size - folder_size;
-                if (available_space > max_size-2)
+                if (available_space > max_size-2)  //if 5 is max then it will start again at 3, 20=>18
                 {
                     printf("Available space: %.3f GB. rgb images & point cloud resuming recording...\n", available_space);
                     break;
                 }
 
-                usleep(10*1000000); // Sleep for 20 seconds before checking again
+                usleep(10*1000000); // Sleep for 10 seconds before checking again
                 folder_size = getFolderSize(save_folder);
             }
         }
