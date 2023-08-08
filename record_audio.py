@@ -12,7 +12,7 @@ RESPEAKER_INDEX = 11  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
 RECORD_SECONDS = 10  # Reduce the recording duration to 10 seconds
 safe_memory = 0.025  # to make it stop at desired size limit
-MAX_FOLDER_SIZE_GB = 20 - safe_memory
+MAX_FOLDER_SIZE_GB = 5 - safe_memory
 
 p = pyaudio.PyAudio()
 
