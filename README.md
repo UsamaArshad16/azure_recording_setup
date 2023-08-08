@@ -33,6 +33,7 @@ This file uploads the audio files on the cloud and deletes the file that is succ
 This sh file runs all the scripts in a sequence.
 
 ## Start the recordings
+Make sure the files are executable and edit the code, set the parameters according to the desired values and generate binaries using command given above.\
 Open the terminal and use the commands below \
 ``` cd /path_to/azure_recodings ```\
 ``` ./setup_recording_xavier.sh ```
