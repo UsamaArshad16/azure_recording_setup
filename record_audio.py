@@ -2,15 +2,17 @@ import os
 import pyaudio
 import wave
 from datetime import datetime, timedelta
+import time
 
 RESPEAKER_RATE = 16000
 RESPEAKER_CHANNELS = 6  # Change based on firmwares, 1_channel_firmware.bin as 1 or 6_channels_firmware.bin as 6
 RESPEAKER_WIDTH = 2
 # Run getDeviceInfo.py to get the index
-RESPEAKER_INDEX = 0  # Refer to the input device id
+RESPEAKER_INDEX = 11  # Refer to the input device id
 CHUNK = 8192  # Increase the CHUNK size further
 RECORD_SECONDS = 10  # Reduce the recording duration to 10 seconds
-MAX_FOLDER_SIZE_GB = 19.80
+safe_memory = 0.025  # to make it stop at desired size limit
+MAX_FOLDER_SIZE_GB = 20 - safe_memory
 
 p = pyaudio.PyAudio()
 
@@ -84,12 +86,20 @@ try:
             folder_size_bytes = get_folder_size(save_folder)
             folder_size_gb = folder_size_bytes / (1024 ** 3)  # Convert bytes to GB
 
-            print(f"Current folder size: {folder_size_gb:.3f} GB")
+            print(f"azure_recordings folder size: {folder_size_gb:.3f} GB")
 
             max_folder_size_bytes = MAX_FOLDER_SIZE_GB * (1024 ** 3)  # Convert GB to bytes
             if folder_size_bytes >= max_folder_size_bytes:
                 print("Folder size exceeds limit. Audio Recording terminated.")
-                break
+                while True:
+                    folder_size_bytes = get_folder_size(save_folder)
+                    folder_size_gb = folder_size_bytes / (1024 ** 3)  # Convert bytes to GB
+                    if folder_size_gb < (MAX_FOLDER_SIZE_GB - 2):  # Wait until folder size is less than 18 GB
+                        break
+                    else:
+                        print("Waiting for space to become available...")
+                        time.sleep(8)  # Wait for 8 seconds before checking again
+                print("Audio Recording Resuming")
 
             # Save the audio recording with the epoch timestamp and count
             current_recording_count = current_recording_count + 1
@@ -107,7 +117,7 @@ try:
 except KeyboardInterrupt:
     pass
 
-print("* done recording")
+print("* done audio recording")
 
 stream.stop_stream()
 stream.close()
