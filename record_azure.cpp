@@ -127,7 +127,7 @@ int main()
     while (true)
     {
         double folder_size = getFolderSize(save_folder);
-        if (folder_size-0.1 > max_size) //if max size is 1 gb then recording will stop at 1.1 gb, this is why -0.1
+        if (folder_size-0.35 > max_size) //if max size is 1 gb then recording will stop at 1.4 gb, this is why -0.35
         {
             printf(" rgb images & point recording paused. Available space: %.3f GB\n", (double)(max_size - folder_size));
             usleep(2000000); // Sleep for 2 seconds before checking again
