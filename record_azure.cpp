@@ -121,28 +121,26 @@ int main()
     int frame_count = 0;
     // Find the highest numbered file in the "azure_recordings/rgb_images" folder
     int image_sequence = getHighestNumberedFile(rgb_folder) + 1;
-    double max_size = 20; // in GBs
+    double max_size = 5; // in GBs
     printf("rgb & point cloud recording started\n");
 
     while (true)
     {
         double folder_size = getFolderSize(save_folder);
-        if (folder_size > max_size)
+        if (folder_size-0.3 > max_size)
         {
-            printf(" rgb images & point recording paused. Available space: %.3f bytes\n", (double)(max_size - folder_size));
+            printf(" rgb images & point recording paused. Available space: %.3f GB\n", (double)(max_size - folder_size));
             usleep(2000000); // Sleep for 2 seconds before checking again
-            //continue;
-            //break;
             while (true) // Wait loop
-            {
+            { double folder_size = getFolderSize(save_folder);
                 double available_space = max_size - folder_size;
-                if (available_space <= 2)
+                if (available_space > max_size-2)
                 {
-                    printf("Available space: %.3f bytes. rgb images & point cloud resuming recording...\n", available_space);
+                    printf("Available space: %.3f GB. rgb images & point cloud resuming recording...\n", available_space);
                     break;
                 }
 
-                usleep(8000000); // Sleep for 2 seconds before checking again
+                usleep(10*1000000); // Sleep for 20 seconds before checking again
                 folder_size = getFolderSize(save_folder);
             }
         }
