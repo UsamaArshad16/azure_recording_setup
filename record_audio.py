@@ -94,11 +94,12 @@ try:
                 while True:
                     folder_size_bytes = get_folder_size(save_folder)
                     folder_size_gb = folder_size_bytes / (1024 ** 3)  # Convert bytes to GB
-                    if folder_size_gb < (MAX_FOLDER_SIZE_GB - 2):  # Wait until folder size is less than 18 GB
+                    available_space = MAX_FOLDER_SIZE_GB - folder_size_gb
+                    if available_space < (MAX_FOLDER_SIZE_GB - 2):  # Wait until folder size is less than 18 GB
                         break
                     else:
                         print("Waiting for space to become available...")
-                        time.sleep(8)  # Wait for 8 seconds before checking again
+                        time.sleep(10)  # Wait for 10 seconds before checking again
                 print("Audio Recording Resuming")
 
             # Save the audio recording with the epoch timestamp and count
