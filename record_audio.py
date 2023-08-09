@@ -95,7 +95,7 @@ try:
                     folder_size_bytes = get_folder_size(save_folder)
                     folder_size_gb = folder_size_bytes / (1024 ** 3)  # Convert bytes to GB
                     available_space = MAX_FOLDER_SIZE_GB - folder_size_gb
-                    if available_space < (MAX_FOLDER_SIZE_GB - 2):  # Wait until folder size is less than 18 GB
+                    if available_space > (MAX_FOLDER_SIZE_GB - 2):  # Wait until folder size is less than 18 GB
                         break
                     else:
                         print("Waiting for space to become available...")
