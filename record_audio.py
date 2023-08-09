@@ -90,7 +90,7 @@ try:
 
             max_folder_size_bytes = MAX_FOLDER_SIZE_GB * (1024 ** 3)  # Convert GB to bytes
             if folder_size_bytes >= max_folder_size_bytes:
-                print("Folder size exceeds limit. Audio Recording terminated.")
+                print("Folder size exceeds limit. Audio Recording paused.")
                 while True:
                     folder_size_bytes = get_folder_size(save_folder)
                     folder_size_gb = folder_size_bytes / (1024 ** 3)  # Convert bytes to GB
